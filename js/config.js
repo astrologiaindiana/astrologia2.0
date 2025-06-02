@@ -1,4 +1,6 @@
-// Configuração do Firebase
+// === config.js ===
+
+// Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAngAB_zoXr5lsi1N8WocVJeHFq6QjdUUs",
   authDomain: "astrologia-indiana-app.firebaseapp.com",
@@ -8,13 +10,9 @@ const firebaseConfig = {
   appId: "1:1055729827966:web:51954b0cabee762653d82f"
 };
 
-// Inicializar Firebase
 firebase.initializeApp(firebaseConfig);
 
-// Criar objeto global de autenticação
-const auth = firebase.auth();
-
-// Inicializar Airtable
+// Airtable (com suas credenciais reais)
 const airtableBase = new Airtable({
   apiKey: "patkcHF16ytjQFYtf.2d2b97aeab44b5961a1c7e4c68e6f5e2bdef0b81f2cd0303dc2580f9d96df10d"
 }).base("appc74NoitSC8w1XQ");
@@ -26,7 +24,3 @@ const TABLES = {
   CLIENTS: "Clientes",
   VIDEO_CALLS: "Videochamadas"
 };
-
-
-// Inicialização do Airtable
-const airtableBase = new Airtable({ apiKey: airtableConfig.apiKey }).base(airtableConfig.baseId);
