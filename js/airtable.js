@@ -1,5 +1,5 @@
 // Funções para interagir com o Airtable
-const base = window.airtableBase;
+const base = window.base;
 
 // Carregar tipos de mapas
 function loadMapTypes() {
@@ -67,7 +67,7 @@ function loadOrders(filters = {}) {
     }
     
     // Fazer a consulta
-    airtableBase(TABLES.ORDERS).select(queryOptions).eachPage(function page(records, fetchNextPage) {
+    base(TABLES.ORDERS).select(queryOptions).eachPage(function page(records, fetchNextPage) {
         // Processar os registros desta página
         const orders = records.map(record => ({
             id: record.id,
@@ -117,7 +117,7 @@ function loadClients(search = '') {
     }
     
     // Fazer a consulta
-    airtableBase(TABLES.CLIENTS).select(queryOptions).eachPage(function page(records, fetchNextPage) {
+    base(TABLES.CLIENTS).select(queryOptions).eachPage(function page(records, fetchNextPage) {
         // Processar os registros desta página
         const clients = records.map(record => ({
             id: record.id,
@@ -165,7 +165,7 @@ function loadVideoCalls(date = null) {
     }
     
     // Fazer a consulta
-    airtableBase(TABLES.VIDEO_CALLS).select(queryOptions).eachPage(function page(records, fetchNextPage) {
+    base(TABLES.VIDEO_CALLS).select(queryOptions).eachPage(function page(records, fetchNextPage) {
         // Processar os registros desta página
         const videoCalls = records.map(record => ({
             id: record.id,
@@ -233,7 +233,7 @@ function loadFinancialData(period = 'day', date = new Date()) {
     }
     
     // Fazer a consulta
-    airtableBase(TABLES.ORDERS).select(queryOptions).eachPage(function page(records, fetchNextPage) {
+    base(TABLES.ORDERS).select(queryOptions).eachPage(function page(records, fetchNextPage) {
         // Processar os registros desta página
         const orders = records.map(record => ({
             id: record.id,
@@ -261,7 +261,7 @@ function loadFinancialData(period = 'day', date = new Date()) {
 // Registrar nova venda
 function createNewSale(saleData) {
     // Primeiro, verificar se o cliente já existe
-    airtableBase(TABLES.CLIENTS).select({
+    base(TABLES.CLIENTS).select({
         filterByFormula: `{WhatsApp} = '${saleData.whatsapp}'`
     }).firstPage((err, records) => {
         if (err) {
@@ -274,7 +274,7 @@ function createNewSale(saleData) {
         
         // Se o cliente não existir, criar um novo
         if (records.length === 0) {
-            airtableBase(TABLES.CLIENTS).create({
+            base(TABLES.CLIENTS).create({
                 'Nome': saleData.name,
                 'WhatsApp': saleData.whatsapp,
                 'Data de Nascimento': saleData.birthDate,
@@ -295,7 +295,7 @@ function createNewSale(saleData) {
             clientId = records[0].id;
             
             // Atualizar informações do cliente, se necessário
-            airtableBase(TABLES.CLIENTS).update(clientId, {
+            base(TABLES.CLIENTS).update(clientId, {
                 'Data de Nascimento': saleData.birthDate,
                 'Hora de Nascimento': saleData.birthTime,
                 'Local de Nascimento': saleData.birthPlace
@@ -312,7 +312,7 @@ function createNewSale(saleData) {
         // Função para criar o pedido
         function createOrder(clientId) {
             // Buscar o valor do tipo de mapa
-            airtableBase(TABLES.MAP_TYPES).select({
+            base(TABLES.MAP_TYPES).select({
                 filterByFormula: `{Nome} = '${saleData.mapType}'`
             }).firstPage((err, records) => {
                 if (err || records.length === 0) {
@@ -324,7 +324,7 @@ function createNewSale(saleData) {
                 const mapValue = records[0].get('Valor');
                 
                 // Criar o pedido
-                airtableBase(TABLES.ORDERS).create({
+                base(TABLES.ORDERS).create({
                     'Cliente': [clientId],
                     'Nome do Cliente': saleData.name,
                     'WhatsApp': saleData.whatsapp,
@@ -343,7 +343,7 @@ function createNewSale(saleData) {
                     // Se requer videochamada, criar agendamento
                     if (saleData.requiresVideocall) {
                         // Criar entrada na tabela de videochamadas (sem data definida ainda)
-                        airtableBase(TABLES.VIDEO_CALLS).create({
+                        base(TABLES.VIDEO_CALLS).create({
                             'Cliente': [clientId],
                             'Nome do Cliente': saleData.name,
                             'WhatsApp': saleData.whatsapp,
@@ -373,7 +373,7 @@ function createNewSale(saleData) {
 
 // Marcar pedido como enviado
 function markOrderAsSent(orderId) {
-    airtableBase(TABLES.ORDERS).update(orderId, {
+    base(TABLES.ORDERS).update(orderId, {
         'Status': 'Enviado'
     }, (err) => {
         if (err) {
@@ -389,7 +389,7 @@ function markOrderAsSent(orderId) {
 
 // Adicionar tipo de mapa
 function addMapType(mapTypeData) {
-    airtableBase(TABLES.MAP_TYPES).create({
+    base(TABLES.MAP_TYPES).create({
         'Nome': mapTypeData.name,
         'Valor': mapTypeData.value
     }, (err) => {
@@ -406,7 +406,7 @@ function addMapType(mapTypeData) {
 
 // Atualizar tipo de mapa
 function updateMapType(id, mapTypeData) {
-    airtableBase(TABLES.MAP_TYPES).update(id, {
+    base(TABLES.MAP_TYPES).update(id, {
         'Nome': mapTypeData.name,
         'Valor': mapTypeData.value
     }, (err) => {
@@ -423,7 +423,7 @@ function updateMapType(id, mapTypeData) {
 
 // Excluir tipo de mapa
 function deleteMapType(id) {
-    airtableBase(TABLES.MAP_TYPES).destroy(id, (err) => {
+    base(TABLES.MAP_TYPES).destroy(id, (err) => {
         if (err) {
             console.error('Erro ao excluir tipo de mapa:', err);
             showToast('Erro ao excluir tipo de mapa', 'error');
@@ -437,7 +437,7 @@ function deleteMapType(id) {
 
 // Agendar videochamada
 function scheduleVideoCall(scheduleData) {
-    airtableBase(TABLES.VIDEO_CALLS).create({
+    base(TABLES.VIDEO_CALLS).create({
         'Cliente': [scheduleData.clientId],
         'Nome do Cliente': scheduleData.clientName,
         'WhatsApp': scheduleData.whatsapp,
@@ -458,7 +458,7 @@ function scheduleVideoCall(scheduleData) {
 
 // Marcar videochamada como concluída
 function markVideoCallAsCompleted(id) {
-    airtableBase(TABLES.VIDEO_CALLS).update(id, {
+    base(TABLES.VIDEO_CALLS).update(id, {
         'Concluída': true
     }, (err) => {
         if (err) {
@@ -474,7 +474,7 @@ function markVideoCallAsCompleted(id) {
 
 // Excluir videochamada
 function deleteVideoCall(id) {
-    airtableBase(TABLES.VIDEO_CALLS).destroy(id, (err) => {
+    base(TABLES.VIDEO_CALLS).destroy(id, (err) => {
         if (err) {
             console.error('Erro ao excluir videochamada:', err);
             showToast('Erro ao excluir videochamada', 'error');
