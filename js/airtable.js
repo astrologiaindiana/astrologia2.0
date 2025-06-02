@@ -1,9 +1,11 @@
 // Funções para interagir com o Airtable
+const base = window.airtableBase;
+
 // Carregar tipos de mapas
 function loadMapTypes() {
     showLoading('map-types-loading');
     
-    airtableBase(TABLES.MAP_TYPES).select({
+    base(TABLES.MAP_TYPES).select({
         view: 'Grid view'
     }).eachPage(function page(records, fetchNextPage) {
         // Processar os registros desta página
