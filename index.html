@@ -531,17 +531,20 @@
         </div>
        </div>
     
-<!-- Airtable deve vir antes de config.js -->
-<script src="https://cdn.jsdelivr.net/npm/airtable@0.12.2/build/airtable.browser.js"></script>
-
-<!-- Configuração com suas chaves -->
-<script src="js/config.js"></script>
+<!-- Chart.js (para gráficos) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 
-<!-- Depois os scripts que dependem disso -->
+<!-- Airtable: ESTE TEM QUE VIR ANTES DO config.js -->
+<script src="https://cdn.jsdelivr.net/npm/airtable@0.12.2/build/airtable.browser.js"></script>
+
+<!-- Configurações: Firebase e Airtable -->
+<script src="js/config.js"></script>
+
+<!-- Scripts da aplicação (depois que config já carregou tudo) -->
 <script src="js/auth.js"></script>
 <script src="js/airtable.js"></script>
 <script src="js/utils.js"></script>
@@ -553,6 +556,7 @@
 <script src="js/financial.js"></script>
 <script src="js/settings.js"></script>
 <script src="js/app.js"></script>
+
 
 
 
