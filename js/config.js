@@ -8,20 +8,25 @@ const firebaseConfig = {
   appId: "1:1055729827966:web:51954b0cabee762653d82f"
 };
 
-// Inicialização do Firebase
+// Inicializar Firebase
 firebase.initializeApp(firebaseConfig);
 
-// Configuração do Airtable
-const airtableConfig = {
-  apiKey: "patkcHF16ytjQFYtf.2d2b97aeab44b5961a1c7e4c68e6f5e2bdef0b81f2cd0303dc2580f9d96df10d",
-  baseId: "appc74NoitSC8w1XQ",
-  tables: {
-    orders: "Pedidos",
-    clients: "Clientes",
-    videoCalls: "Videochamadas",
-    mapTypes: "Tipos de Mapa"
-  }
+// Criar objeto global de autenticação
+const auth = firebase.auth();
+
+// Inicializar Airtable
+const airtableBase = new Airtable({
+  apiKey: "patkcHF16ytjQFYtf.2d2b97aeab44b5961a1c7e4c68e6f5e2bdef0b81f2cd0303dc2580f9d96df10d"
+}).base("appc74NoitSC8w1XQ");
+
+// Tabelas
+const TABLES = {
+  MAP_TYPES: "Tipos de Mapa",
+  ORDERS: "Pedidos",
+  CLIENTS: "Clientes",
+  VIDEO_CALLS: "Videochamadas"
 };
+
 
 // Inicialização do Airtable
 const airtableBase = new Airtable({ apiKey: airtableConfig.apiKey }).base(airtableConfig.baseId);
