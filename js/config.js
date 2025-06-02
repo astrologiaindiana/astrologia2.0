@@ -18,8 +18,10 @@ window.airtableBase = new Airtable({
 }).base("appc74NoitSC8w1XQ");
 
 window.TABLES = {
-  MAP_TYPES: "TipoMapas",
+  MAP_TYPES: "Tipos de Mapa",
   ORDERS: "Pedidos",
   CLIENTS: "Clientes",
-  VIDEO_CALLS: "Videochamadas"
+  VIDEO_CALLS: "Videochamada" // Corrigido aqui
+};
+
 };
