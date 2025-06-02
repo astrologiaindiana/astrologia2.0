@@ -18,7 +18,7 @@ window.airtableBase = new Airtable({
 }).base("appc74NoitSC8w1XQ");
 
 window.TABLES = {
-  MAP_TYPES: "Tipos de Mapa",
+  MAP_TYPES: "TipoMapas",
   ORDERS: "Pedidos",
   CLIENTS: "Clientes",
   VIDEO_CALLS: "Videochamadas"
