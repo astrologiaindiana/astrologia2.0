@@ -1,6 +1,6 @@
 // js/airtable.js
 
-const base = window.airtableBase;
+const base = airtableBase;
 
 // Carregar tipos de mapas
 function loadMapTypes() {
