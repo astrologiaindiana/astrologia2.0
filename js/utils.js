@@ -202,7 +202,6 @@ function exportTableToCSV(tableId, filename) {
 }
 
 // Registrar service worker para PWA
-function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js')
             .then(registration => {
