@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function checkAuthState() {
-    auth.onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged(user => {
         if (user) {
             showMainLayout(user);
         } else {
@@ -26,21 +26,25 @@ async function handleLogin() {
 
     try {
         errorElement.textContent = '';
-        await auth.signInWithEmailAndPassword(email, password);
+        await firebase.auth().signInWithEmailAndPassword(email, password);
     } catch (error) {
         console.error('Erro de login:', error);
-        if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
-            errorElement.textContent = 'E-mail ou senha incorretos.';
-        } else if (error.code === 'auth/invalid-email') {
-            errorElement.textContent = 'E-mail inválido.';
-        } else {
-            errorElement.textContent = 'Erro ao fazer login. Tente novamente.';
+        switch (error.code) {
+            case 'auth/user-not-found':
+            case 'auth/wrong-password':
+                errorElement.textContent = 'E-mail ou senha incorretos.';
+                break;
+            case 'auth/invalid-email':
+                errorElement.textContent = 'E-mail inválido.';
+                break;
+            default:
+                errorElement.textContent = 'Erro ao fazer login. Tente novamente.';
         }
     }
 }
 
 function handleLogout() {
-    auth.signOut().catch(error => {
+    firebase.auth().signOut().catch(error => {
         console.error('Erro ao fazer logout:', error);
         showToast('Erro ao fazer logout. Tente novamente.', 'error');
     });
