@@ -24,5 +24,5 @@ window.TABLES = {
   MAP_TYPES: "Tipos de Mapa",
   ORDERS: "Pedidos",
   CLIENTS: "Clientes",
-  VIDEO_CALLS: "Videochamadas"
+  VIDEO_CALLS: "Videochamada"
 };
