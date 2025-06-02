@@ -264,4 +264,12 @@ function updateRevenueSplitChart(conradoValue, kaviValue) {
     
     window.revenueSplitChart.data.datasets[0].data = [conradoValue, kaviValue];
     window.revenueSplitChart.update();
+// Expor função para ser usada em app.js
+function loadFinancialData(period = 'day', date = new Date()) {
+    // Aqui vai a lógica real de carregar dados, por enquanto, simulação:
+    console.log("Carregando dados financeiros para:", period, formatDate(date));
+    // Exemplo de fallback se necessário
+    updateFinancialUI([], period, date);
+}
+
 }
