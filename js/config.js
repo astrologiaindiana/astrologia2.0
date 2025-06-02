@@ -1,6 +1,5 @@
 // === config.js ===
 
-// Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAngAB_zoXr5lsi1N8WocVJeHFq6QjdUUs",
   authDomain: "astrologia-indiana-app.firebaseapp.com",
@@ -12,13 +11,12 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-// Airtable (com suas credenciais reais)
-const airtableBase = new Airtable({
+// Airtable
+window.airtableBase = new Airtable({
   apiKey: "patkcHF16ytjQFYtf.2d2b97aeab44b5961a1c7e4c68e6f5e2bdef0b81f2cd0303dc2580f9d96df10d"
 }).base("appc74NoitSC8w1XQ");
 
-// Tabelas
-const TABLES = {
+window.TABLES = {
   MAP_TYPES: "Tipos de Mapa",
   ORDERS: "Pedidos",
   CLIENTS: "Clientes",
