@@ -11,7 +11,11 @@ const firebaseConfig = {
   measurementId: "G-E1BSNLPJJF"
 };
 
+// Inicializa o Firebase
 firebase.initializeApp(firebaseConfig);
+
+// ⚠️ Esta linha corrige o erro "auth is not defined"
+const auth = firebase.auth(); // <- ESSA LINHA FALTAVA
 
 // 🔗 CONFIGURAÇÃO DO AIRTABLE
 const airtableBase = new Airtable({
@@ -27,5 +31,6 @@ const TABLES = {
 };
 
 // Disponibilizar globalmente
+window.auth = auth;
 window.airtableBase = airtableBase;
 window.TABLES = TABLES;
