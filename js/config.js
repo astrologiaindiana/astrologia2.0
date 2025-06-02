@@ -1,3 +1,4 @@
+console.log("Airtable global está carregado?", typeof Airtable);
 // === config.js ===
 
 // Certifique-se de que o Airtable está importado ANTES deste script no index.html:
