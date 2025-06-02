@@ -1,5 +1,6 @@
-// === config.js ===
+// config.js
 
+// Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAngAB_zoXr5lsi1N8WocVJeHFq6QjdUUs",
   authDomain: "astrologia-indiana-app.firebaseapp.com",
