@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Criar usuários iniciais para demonstração
     // Comentar esta linha em produção
-    createInitialUsers();
 });
 
 // Arquivo de manifesto para PWA
