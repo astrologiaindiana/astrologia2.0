@@ -11,18 +11,18 @@ const firebaseConfig = {
   measurementId: "G-E1BSNLPJJF"
 };
 
-// Inicializa o Firebase
+// Inicializar Firebase
 firebase.initializeApp(firebaseConfig);
 
-// ⚠️ Esta linha corrige o erro "auth is not defined"
-const auth = firebase.auth(); // <- ESSA LINHA FALTAVA
+// 🔒 ESSA LINHA É O QUE FALTAVA!
+const auth = firebase.auth();
 
 // 🔗 CONFIGURAÇÃO DO AIRTABLE
 const airtableBase = new Airtable({
   apiKey: "patkcHF16ytjQFYtf.2d2b97aeab44b5961a1c7e4c68e6f5e2bdef0b81f2cd0303dc2580f9d96df10d"
 }).base("appc74NoitSC8w1XQ");
 
-// 🔢 NOMES DAS TABELAS
+// 🔢 Nomes das tabelas
 const TABLES = {
   MAP_TYPES: "TipoMapas",
   ORDERS: "Pedidos",
@@ -30,7 +30,7 @@ const TABLES = {
   VIDEO_CALLS: "Videochamada"
 };
 
-// Disponibilizar globalmente
+// Disponibilizar no escopo global
 window.auth = auth;
 window.airtableBase = airtableBase;
 window.TABLES = TABLES;
